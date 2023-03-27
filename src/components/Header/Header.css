@@ -1,0 +1,6 @@
+nav div a {
+    font-weight: 500;
+}
+nav div a:hover{
+    color:orange;
+}

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import Cart from '../Cart/Cart';
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import OrderReview from '../OrderReview/OrderReview';
-import { removeFromDb } from '../../utilities/fakedb';
+import { deleteShoppingCart, removeFromDb } from '../../utilities/fakedb';
 
 
 
@@ -16,6 +16,11 @@ const Orders = () => {
         removeFromDb(id)
 
     }
+    const handleClearCart = () =>{
+        setCart([])
+        deleteShoppingCart()
+    }
+
     console.log(cart)
     return (
         <div className='grid grid-cols-3 gap-6'>
@@ -26,7 +31,9 @@ const Orders = () => {
             </div>
             <div className='col-span-1  bg-[#ff99004c;] h-[500px] w-[257px] mx-auto mr-3 sticky top-0'>
                 <h1 className='text-xl text-center font-semibold mt-5'>Order Summary</h1>
-                <Cart cart={cart} />
+                <Cart handleClearCart={handleClearCart} cart={cart} >
+                    <Link to='/checkout' ><button>Proceed Checkout</button></Link>
+                </Cart>
             </div>
         </div>
     );
